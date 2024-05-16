@@ -13,6 +13,7 @@ django-cors-headers = "*"
 django-filter = "*"
 drfpasswordless = "*"
 requests = "*"
+gradio-client = "*"
 
 [dev-packages]
 

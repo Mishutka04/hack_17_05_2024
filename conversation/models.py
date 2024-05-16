@@ -103,6 +103,10 @@ class Negotiation(models.Model):
                     }
                     accordance = 0.8
                     self.percentage_compliance = ut.query_sentence_transformers(payload)[0]
+                    # text_for_nlp = f"""Вот эталонный диалог регламента: {self.reference_dialog.text},
+                    # а вот реальный диалог {text}. Есть ли нарушение регламента и если есть то в чём"""
+                    text_for_nlp = f"""Есть ли в этом тексте нарушение регламента переговоров РЖД: {text}. Есть есть то какие"""
+                    print(ut.query_predict_nlp(text_for_nlp))
                     if self.percentage_compliance >= accordance:
                         self.regulations_complies=True
                     super(Negotiation, self).save(*args, **kwargs)
