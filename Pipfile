@@ -14,6 +14,7 @@ django-filter = "*"
 drfpasswordless = "*"
 requests = "*"
 gradio-client = "*"
+stable-ts = {git = "git+https://github.com/jianfch/stable-ts.git"}
 
 [dev-packages]
 

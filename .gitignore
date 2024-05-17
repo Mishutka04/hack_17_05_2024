@@ -22,7 +22,7 @@ parts/
 sdist/
 var/
 wheels/
-uploads/
+# uploads/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -181,8 +181,8 @@ typings/
 # templates
 # /templates
 
-uploads
-/uploads
+# uploads
+# /uploads
 
 ya copy.xml
 
@@ -200,3 +200,5 @@ ya copy.xml
 .key
 
 commands.txt
+
+/ml_models
