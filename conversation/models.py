@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import os
-#import conversation.utils as ut
+import conversation.utils as ut
 import re
 
 
@@ -70,7 +70,7 @@ class Negotiation(models.Model):
         blank=True
         )
     date = models.DateField(
-        auto_now_add=True
+        # auto_now_add=True,
         )
     audio_file = models.FileField(
         upload_to='negotiation_audio/',
@@ -107,7 +107,7 @@ class Negotiation(models.Model):
                             ]
                         }
                     }
-                    accordance = 0.77
+                    accordance = 0.71
                     self.percentage_compliance = ut.query_sentence_transformers(payload)[0]
                     text_for_nlp = f"""Есть ли в этом тексте нарушения КЛАССИФИКАТОРА
 
