@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-sm-2 left_row">
+    <div class="col-sm-2 height">
       <div class="item_list">
         <div class="list_title">
           Маршруты
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="col-sm-4 chat_block">
+    <div class="col-sm-4 height">
       <div v-if="message" class="chat">
         <div class="chat_title">
           <div>Диалог: {{ message[0].title }}</div>
@@ -40,15 +40,16 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 height">
       <div class="result" v-if="message">
         <div class="stat_title">Результат</div>
         <div class="stat_list">
           <div class="stat_item">Название диалога - <b>{{ message[0].title }}</b></div>
-          <div class="stat_item">Качество диалога -  <b>{{ message[0].percentage_compliance }}</b></div>
-          
-          
-          <div v-if="message[0].regulations_complies" class="stat_item">Соотвествествие нормативу - <b>соотвествует</b>
+          <div class="stat_item">Качество диалога - <b>{{ message[0].percentage_compliance.toFixed(1) * 100 }} %</b>
+          </div>
+          <div v-if="message[0].regulations_complies" class="stat_item">
+            <div>Соотвествествие нормативу - <b>соотвествует</b></div>
+            <div>Данный диалог не несет никакой опастности!</div>
           </div>
           <div v-else class="stat_item">Соотвествествие нормативу - <b>не соотвествует</b>
             <div class="error">

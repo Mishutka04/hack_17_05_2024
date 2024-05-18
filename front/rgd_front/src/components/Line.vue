@@ -1,25 +1,29 @@
 <template>
     <div class="row">
-        <div class="col-sm-2 left_row">
+        <div class="col-sm-2 height">
             <div class="item_list">
                 <div class="list_title">
                     <div>Маршруты</div>
                 </div>
-                <div v-for="(line, index) in lines" :key='index' v-if="lines">
-                    <div class="item" @click="Mark_get(line.id)">
-                        <div>{{ line.title }}</div>
-                        <img src="../assets/home.png" alt="" width="27px" height="27px">
+                <div class="list_messages" v-if="lines">
+                    <div v-for="(line, index) in lines" :key='index'>
+                        <div class="item" @click="Mark_get(line.id)">
+                            <div>{{ line.title }}</div>
+                            <img src="../assets/home.png" alt="" width="27px" height="27px">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 chat_block">
+        <div class="col-sm-4 height">
             <div class="chat_message">
                 <div class="list_title">
                     <div>Диалоги</div>
                 </div>
-                <div v-for="(dial, index) in dialog" :key='index' v-if="lines">
-                    <div class="item" @click="Item_get(dial.id)">
+                <div class="list_messages">
+                    <div v-for="(dial, index) in dialog" :key='index' v-if="lines" class="item"
+                        @click="Item_get(dial.id)">
+
                         <div>{{ dial.title }}</div>
                         <div v-if="dial.regulations_complies"><img src="../assets/yes.png" alt="yes" width="30px"
                                 height="30px"></div>
@@ -29,14 +33,14 @@
             </div>
 
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 height">
             <div class="result">
                 <div class="stat_title">Результат</div>
                 <div class="stat_item">Качество переговоров - <b>{{ this.sr_count }} %</b></div>
                 <div class="stat_item">Качество нарушений - <b>{{ this.count_not_accept }}</b></div>
                 <div class="stat_item">Качество переговоров без нарушений - <b>{{ this.count_accept }}</b></div>
                 <div class="grafic">
-                    <canvas id="myChart" width="500" height="500"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -82,7 +86,7 @@ export default {
                 };
                 this.sr_count = this.sr_count + this.dialog[i].percentage_compliance;
             };
-            this.sr_count = this.count_accept * 100 / this.dialog.length;
+            this.sr_count = (this.count_accept * 100 / this.dialog.length).toFixed(1);
         }),
             axios.get(this.$globalUrl + 'api/lines/').then(response => {
                 this.lines = response.data;
@@ -96,8 +100,8 @@ export default {
                         labels: ["Нарушения", "Без нарушений"],
                         datasets: [{
                             label: "Единиц",
-                            backgroundColor: ["#FF0000", "#008000"],
-                            data: [this.count_accept, this.count_not_accept]
+                            backgroundColor: ["#FF3300", "#339966"],
+                            data: [this.count_not_accept, this.count_accept]
                         }]
                     },
                     options: {
@@ -105,7 +109,8 @@ export default {
                             display: true,
                             text: 'Predicted world population (millions) in 2050'
                         },
-                        responsive: false,
+                        responsive: true,
+
                     }
                 })
             }, 1000);

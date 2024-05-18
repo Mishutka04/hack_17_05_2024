@@ -23,7 +23,7 @@ class NegotiationListCreateAPIView(generics.ListAPIView):
     def get_queryset(self, *args, **kwargs):
         if 'pk' in self.kwargs:
             return Negotiation.objects.filter(line=self.kwargs['pk'])
-        return Negotiation.objects.all().order_by('date')
+        return Negotiation.objects.all()
 
 
 class NegotiationInfoList(generics.ListAPIView):

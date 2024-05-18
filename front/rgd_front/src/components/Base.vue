@@ -14,7 +14,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="mark_bottom">
                             <div class="line"></div>
                             <div class="container">
@@ -44,15 +44,15 @@
                     <div class="block_title">График нарушений</div>
                     <div class="line"></div>
                     <div class="grafic">
-                        <canvas id="myChart" width="300" height="300"></canvas>
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
                 <div class="stat">
                     <div class="block_title">Детальная информация</div>
                     <div class="line"></div>
                     <div class="stat_item">Качество переговоров - <b>{{ this.sr_count }} %</b></div>
-                    <div class="stat_item">Качество нарушений - <b>{{ this.count_not_accept }}</b></div>
-                    <div class="stat_item">Качество переговоров без нарушений - <b>{{ this.count_accept }}</b></div>
+                    <div class="stat_item">Количество переговоров с нарушениями - <b>{{ this.count_not_accept }}</b></div>
+                    <div class="stat_item">Количество переговоров без нарушений - <b>{{ this.count_accept }}</b></div>
 
                 </div>
             </div>
@@ -99,7 +99,7 @@ export default {
                     };
                     this.sr_count = this.sr_count + response.data[i].percentage_compliance;
                 };
-                this.sr_count = this.count_accept * 100 / response.data.length;
+                this.sr_count = (this.count_accept * 100 / response.data.length).toFixed(1);
             }),
             setTimeout(() => {
 
@@ -109,8 +109,8 @@ export default {
                         labels: ["Нарушения", "Без нарушений"],
                         datasets: [{
                             label: "Единиц",
-                            backgroundColor: ["#FF3300", "#66CC66"],
-                            data: [this.count_accept, this.count_not_accept]
+                            backgroundColor: ["#FF3300", "#339966"],
+                            data: [this.count_not_accept,this.count_accept,]
                         }]
                     },
                     options: {
@@ -118,7 +118,7 @@ export default {
                             display: true,
                             text: 'Predicted world population (millions) in 2050'
                         },
-                        responsive: false,
+                        responsive: true,
                     }
                 })
             }, 1000);
