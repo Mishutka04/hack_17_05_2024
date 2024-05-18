@@ -24,9 +24,4 @@ const Item_get = (id) => {
 </template>
 
 <style>
-.chart-container {
-  background-color: #eee8d5;
-  border-radius: 0.5rem;
-
-}
 </style>

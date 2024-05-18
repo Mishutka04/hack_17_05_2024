@@ -3,25 +3,25 @@
         <div class="col-sm-2 left_row">
             <div class="item_list">
                 <div class="list_title">
-                    Маршруты
+                    <div>Маршруты</div>
                 </div>
                 <div v-for="(line, index) in lines" :key='index' v-if="lines">
                     <div class="item" @click="Mark_get(line.id)">
-                        {{ line.title }}
-
+                        <div>{{ line.title }}</div>
+                        <img src="../assets/home.png" alt="" width="27px" height="27px">
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-4 chat_block">
-            <div class="item_list">
+            <div class="chat_message">
                 <div class="list_title">
                     <div>Диалоги</div>
                 </div>
                 <div v-for="(dial, index) in dialog" :key='index' v-if="lines">
                     <div class="item" @click="Item_get(dial.id)">
                         <div>{{ dial.title }}</div>
-                            <div v-if="dial.regulations_complies"><img src="../assets/yes.png" alt="yes" width="30px"
+                        <div v-if="dial.regulations_complies"><img src="../assets/yes.png" alt="yes" width="30px"
                                 height="30px"></div>
                         <div v-else><img src="../assets/no.png" alt="yes" width="30px" height="30px"></div>
                     </div>
@@ -30,11 +30,15 @@
 
         </div>
         <div class="col-sm-6">
-            <div class="stat_title">Результат</div>
-            <div>Качество переговоров - {{ this.sr_count }} %</div>
-            <div>Качество нарушений - {{ this.count_not_accept }}</div>
-            <div>Качество переговоров без нарушений - {{ this.count_accept }}</div>
-            <canvas id="myChart" width="500" height="500"></canvas>
+            <div class="result">
+                <div class="stat_title">Результат</div>
+                <div class="stat_item">Качество переговоров - <b>{{ this.sr_count }} %</b></div>
+                <div class="stat_item">Качество нарушений - <b>{{ this.count_not_accept }}</b></div>
+                <div class="stat_item">Качество переговоров без нарушений - <b>{{ this.count_accept }}</b></div>
+                <div class="grafic">
+                    <canvas id="myChart" width="500" height="500"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -51,7 +55,7 @@ export default {
             dialog: null,
             count_accept: 0,
             count_not_accept: 0,
-            sr_count:0,
+            sr_count: 0,
         }
     },
     setup() {
@@ -72,9 +76,9 @@ export default {
             this.dialog = response.data;
             for (let i = 0; i < this.dialog.length; i++) {
                 if (this.dialog[i].regulations_complies) {
-                    this.count_accept =  this.count_accept + 1;
+                    this.count_accept = this.count_accept + 1;
                 } else {
-                    this.count_not_accept =  this.count_not_accept + 1;
+                    this.count_not_accept = this.count_not_accept + 1;
                 };
                 this.sr_count = this.sr_count + this.dialog[i].percentage_compliance;
             };
@@ -85,7 +89,7 @@ export default {
 
             }),
             setTimeout(() => {
-                
+
                 new Chart(document.getElementById('myChart'), {
                     type: 'pie',
                     data: {
@@ -93,7 +97,7 @@ export default {
                         datasets: [{
                             label: "Единиц",
                             backgroundColor: ["#FF0000", "#008000"],
-                            data: [ this.count_accept,  this.count_not_accept]
+                            data: [this.count_accept, this.count_not_accept]
                         }]
                     },
                     options: {
@@ -103,8 +107,9 @@ export default {
                         },
                         responsive: false,
                     }
-                })}, 1000);
-                console.log( this.count_accept);
+                })
+            }, 1000);
+        console.log(this.count_accept);
     },
 
 }

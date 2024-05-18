@@ -7,32 +7,33 @@
         </div>
         <div v-for="(line, index) in lines" :key='index' v-if="lines">
           <div class="item" @click="Mark_get(line.id)">
-            {{ line.title }}
+            <div>{{ line.title }}</div>
+            <img src="../assets/home.png" alt="" width="27px" height="27px">
           </div>
         </div>
       </div>
     </div>
 
     <div class="col-sm-4 chat_block">
-      <div class="chat">
-        <div class="chat_title">ID: 123123</div>
+      <div v-if="message" class="chat">
+        <div class="chat_title">
+          <div>Диалог: {{ message[0].title }}</div>
+        </div>
         <div class="chat_messages" style="overflow-y:scroll;">
-          <div v-if="message">
-            <div class="left_message">
-              <div class="message left">
-                <div class="voice">
-                  <div class="play">
-                    <img src="../assets/play.svg" alt="" width="50px" height="50px"
-                      @click="play(message[0].audio_file)">
-                  </div>
-                  <div class="sound">
-                    <img src="../assets/sound.svg" alt="" height="50px">
-                  </div>
 
+          <div class="left_message">
+            <div class="message left">
+              <div class="voice">
+                <div class="play">
+                  <img src="../assets/play.svg" alt="" width="50px" height="50px" @click="play(message[0].audio_file)">
                 </div>
-                <div class="text">
-                  {{ message[0].audio_text }}
+                <div class="sound">
+                  <img src="../assets/sound.svg" alt="" height="50px">
                 </div>
+
+              </div>
+              <div class="text">
+                {{ message[0].audio_text }}
               </div>
             </div>
           </div>
@@ -40,16 +41,22 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="stat_title">Результат</div>
-      <div v-if="message">
-        <div>Название диалога - {{ message[0].title }}</div>
-        <div>Дата - {{ message[0].date }}</div>
-        <div>Качество диалога - {{ message[0].percentage_compliance }}</div>
-        <div v-if="message[0].regulations_complies">Соотвествествие нормативу - соотвествует. </div>
-        <div v-else>Соотвествествие нормативу - не соотвествует. <div>Комментарий к нарушению - {{ message[0].comment }}
+      <div class="result" v-if="message">
+        <div class="stat_title">Результат</div>
+        <div class="stat_list">
+          <div class="stat_item">Название диалога - <b>{{ message[0].title }}</b></div>
+          <div class="stat_item">Качество диалога -  <b>{{ message[0].percentage_compliance }}</b></div>
+          
+          
+          <div v-if="message[0].regulations_complies" class="stat_item">Соотвествествие нормативу - <b>соотвествует</b>
           </div>
+          <div v-else class="stat_item">Соотвествествие нормативу - <b>не соотвествует</b>
+            <div class="error">
+              <div class="stat_item">Комментарий к нарушению - {{ message[0].comment }}</div>
+            </div>
+          </div>
+          <div class="stat_item">Дата - <b>{{ message[0].date }}</b></div>
         </div>
-        <div></div>
       </div>
 
     </div>
@@ -60,7 +67,6 @@
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 import axios from 'axios';
-import Chart from 'chart.js/auto';
 export default {
   data() {
     return {
@@ -99,9 +105,9 @@ export default {
     }
   },
   mounted() {
-      axios.get('http://127.0.0.1:8000/api/negotiations_info/' + this.route.params.chat_id,).then(response => {
-        this.message = response.data
-      }),
+    axios.get('http://127.0.0.1:8000/api/negotiations_info/' + this.route.params.chat_id,).then(response => {
+      this.message = response.data
+    }),
       axios.get('http://127.0.0.1:8000/api/lines/').then(response => {
         this.lines = response.data;
 
