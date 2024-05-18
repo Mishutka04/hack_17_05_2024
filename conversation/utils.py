@@ -1,5 +1,8 @@
 import requests
-import stable_whisper
+try:
+    import stable_whisper
+except ModuleNotFoundError:
+    pass
 from gradio_client import Client
 from config.settings import TOKEN_TRANSFORMRS_API
 
