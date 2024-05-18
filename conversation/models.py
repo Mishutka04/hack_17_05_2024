@@ -2,7 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 import os
 import conversation.utils as ut
-import re
 
 
 def validate_audio_file_extension(value):
@@ -258,8 +257,7 @@ class Negotiation(models.Model):
                     comment = ut.query_predict_nlp(text_for_nlp)
                     # text_for_nlp = f"""Есть ли в этом тексте нарушение регламента переговоров РЖД: {text}. Есть есть то какие"""
                     # print(ut.query_predict_nlp(text_for_nlp))
-                    cleaned_comment = re.sub(r'[^a-zA-Z0-9а-яА-Я\s]', '', comment)
-                    self.comment=cleaned_comment
+                    self.comment=comment
                     if self.percentage_compliance >= accordance:
                         self.regulations_complies=True
                     super(Negotiation, self).save(*args, **kwargs)
