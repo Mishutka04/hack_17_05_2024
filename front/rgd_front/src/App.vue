@@ -1,16 +1,11 @@
-<script>
-import Chat from "./components/Chat.vue"
-import BarChart from "./components/BarChart.vue"
-import Line from "./components/Line.vue"
-export default {
-  name: 'App',
-  components: { BarChart, Chat, Line },
-  data() {
-    return {
-      category: null,
-    }
-  }
+<script setup>
+
+import { useRouter } from "vue-router";
+const router = useRouter();
+const Item_get = (id) => {
+  router.push('/route/' + id);
 }
+
 </script>
 
 <template>
@@ -32,25 +27,9 @@ export default {
       </ul>
     </div>
   </nav>
-  <div class="row">
-    <div class="col-sm-2 left_row">
-      <div class="item_list">
-        <div class="list_title">
-          Маршруты
-        </div>
-        <div class="item">
-          № 123231
-        </div>
-        <div class="item">
-          № 123231
-        </div>
-        <div class="item">
-          № 123231
-        </div>
-      </div>
-    </div>
+
     <router-view :key='$route.fullPath'></router-view>
-  </div>
+
 </template>
 
 <style>

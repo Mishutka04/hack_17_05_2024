@@ -9,10 +9,27 @@ class LineListAPIView(generics.ListAPIView):
 
 
 class ReferenceDialogListAPIView(generics.ListAPIView):
-    queryset = ReferenceDialog.objects.all()
     serializer_class = ReferenceDialogSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        if 'pk' in self.kwargs:
+            return ReferenceDialog.objects.filter(pk=self.kwargs['pk'])
+        return ReferenceDialog.objects.all()
 
 
 class NegotiationListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Negotiation.objects.all()
     serializer_class = NegotiationSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        if 'pk' in self.kwargs:
+            return Negotiation.objects.filter(line=self.kwargs['pk'])
+        return Negotiation.objects.all()
+
+
+class NegotiationInfoList(generics.ListCreateAPIView):
+    serializer_class = NegotiationSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        if 'pk' in self.kwargs:
+            return Negotiation.objects.filter(pk=self.kwargs['pk'])
+        return Negotiation.objects.all()

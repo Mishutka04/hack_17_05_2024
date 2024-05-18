@@ -6,7 +6,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('drfpasswordless.urls')),
+    #path('api/', include('drfpasswordless.urls')),
     path('api/', include('conversation.urls')),
 ]
 if settings.DEBUG:

@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import os
-import conversation.utils as ut
+#import conversation.utils as ut
 import re
 
 
