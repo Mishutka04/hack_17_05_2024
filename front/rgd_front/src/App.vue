@@ -9,20 +9,11 @@ const Item_get = (id) => {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-sm bg-dark back">
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link active" href="#"><img src="./assets/RZD logo.png" alt="" width="300px" height="50px"></a>
         </li>
       </ul>
     </div>
@@ -36,5 +27,6 @@ const Item_get = (id) => {
 .chart-container {
   background-color: #eee8d5;
   border-radius: 0.5rem;
+
 }
 </style>

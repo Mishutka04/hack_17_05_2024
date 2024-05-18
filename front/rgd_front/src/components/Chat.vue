@@ -41,9 +41,15 @@
     </div>
     <div class="col-sm-6">
       <div class="stat_title">Результат</div>
-      <div>Метрика - 15%</div>
-      <div>
-        <canvas id="myChart" width="500" height="500"></canvas>
+      <div v-if="message">
+        <div>Название диалога - {{ message[0].title }}</div>
+        <div>Дата - {{ message[0].date }}</div>
+        <div>Качество диалога - {{ message[0].percentage_compliance }}</div>
+        <div v-if="message[0].regulations_complies">Соотвествествие нормативу - соотвествует. </div>
+        <div v-else>Соотвествествие нормативу - не соотвествует. <div>Комментарий к нарушению - {{ message[0].comment }}
+          </div>
+        </div>
+        <div></div>
       </div>
 
     </div>
@@ -61,7 +67,8 @@ export default {
       lines: null,
       message: null,
       audio_voice: null,
-      chat_id: null
+      chat_id: null,
+
     }
   },
   setup() {
@@ -92,31 +99,13 @@ export default {
     }
   },
   mounted() {
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ["Нарушения", "Без нарушений"],
-        datasets: [{
-          label: "Population (millions)",
-          backgroundColor: ["#FF0000", "#008000"],
-          data: [10, 30]
-        }]
-      },
-      options: {
-        title: {
-          display: true,
-          text: 'Predicted world population (millions) in 2050'
-        },
-        responsive: false,
-      }
-    });
-    axios.get('http://127.0.0.1:8000/api/negotiations_info/' + this.route.params.chat_id,).then(response => {
-      this.message = response.data
-    }),
-    axios.get('http://127.0.0.1:8000/api/lines/').then(response => {
-                this.lines = response.data
-            })
+      axios.get('http://127.0.0.1:8000/api/negotiations_info/' + this.route.params.chat_id,).then(response => {
+        this.message = response.data
+      }),
+      axios.get('http://127.0.0.1:8000/api/lines/').then(response => {
+        this.lines = response.data;
+
+      });
   }
 }
 

@@ -17,16 +17,16 @@ class ReferenceDialogListAPIView(generics.ListAPIView):
         return ReferenceDialog.objects.all()
 
 
-class NegotiationListCreateAPIView(generics.ListCreateAPIView):
+class NegotiationListCreateAPIView(generics.ListAPIView):
     serializer_class = NegotiationSerializer
 
     def get_queryset(self, *args, **kwargs):
         if 'pk' in self.kwargs:
             return Negotiation.objects.filter(line=self.kwargs['pk'])
-        return Negotiation.objects.all()
+        return Negotiation.objects.all().order_by('date')
 
 
-class NegotiationInfoList(generics.ListCreateAPIView):
+class NegotiationInfoList(generics.ListAPIView):
     serializer_class = NegotiationSerializer
 
     def get_queryset(self, *args, **kwargs):

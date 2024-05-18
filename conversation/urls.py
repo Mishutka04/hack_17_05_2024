@@ -27,9 +27,9 @@ urlpatterns = [
     path(
         'negotiations/<int:pk>/',
         NegotiationListCreateAPIView.as_view(),
-        name='negotiation-list-create'),
+        name='negotiation-list-create3'),
     path(
         'negotiations_info/<int:pk>/',
         NegotiationInfoList.as_view(),
-        name='negotiation-list-create'),
+        name='negotiation_info-list-create'),
 ]
