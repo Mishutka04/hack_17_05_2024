@@ -87,10 +87,10 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://127.0.0.1:8000/api/lines/').then(response => {
+        axios.get(this.$globalUrl + 'api/lines/').then(response => {
             this.lines = response.data
         }),
-            axios.get('http://127.0.0.1:8000/api/negotiations/').then(response => {
+            axios.get(this.$globalUrl + 'api/negotiations/').then(response => {
                 for (let i = 0; i < response.data.length; i++) {
                     if (response.data[i].regulations_complies) {
                         this.count_accept = this.count_accept + 1;

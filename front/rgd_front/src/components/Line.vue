@@ -72,7 +72,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://127.0.0.1:8000/api/negotiations/' + this.route.params.category_id).then(response => {
+        axios.get(this.$globalUrl + 'api/negotiations/' + this.route.params.category_id).then(response => {
             this.dialog = response.data;
             for (let i = 0; i < this.dialog.length; i++) {
                 if (this.dialog[i].regulations_complies) {
@@ -84,7 +84,7 @@ export default {
             };
             this.sr_count = this.count_accept * 100 / this.dialog.length;
         }),
-            axios.get('http://127.0.0.1:8000/api/lines/').then(response => {
+            axios.get(this.$globalUrl + 'api/lines/').then(response => {
                 this.lines = response.data;
 
             }),

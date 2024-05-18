@@ -105,10 +105,10 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://127.0.0.1:8000/api/negotiations_info/' + this.route.params.chat_id,).then(response => {
+    axios.get(this.$globalUrl + 'api/negotiations_info/' + this.route.params.chat_id,).then(response => {
       this.message = response.data
     }),
-      axios.get('http://127.0.0.1:8000/api/lines/').then(response => {
+      axios.get(this.$globalUrl + 'api/lines/').then(response => {
         this.lines = response.data;
 
       });

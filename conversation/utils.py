@@ -1,19 +1,18 @@
 import requests
-import stable_whisper
+# import stable_whisper
 from gradio_client import Client
 from config.settings import TOKEN_TRANSFORMRS_API
-
 
 headers = {"Authorization": f"Bearer {TOKEN_TRANSFORMRS_API}"}
 
 
 def query_wisper(data):
-    API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3" # noqa
+    API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"  # noqa
     response = requests.post(
         API_URL,
         headers=headers,
         data=data
-        )
+    )
     re = response.json().get('text')
     print(re)
     return re
@@ -29,19 +28,17 @@ def query_wisper(data):
 #     return result.text
 
 
-
 def query_sentence_transformers(payload):
-    API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2" # noqa
+    API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"  # noqa
     response = requests.post(
         API_URL,
         headers=headers,
         json=payload
-        )
+    )
     return response.json()
 
 
 def query_predict_nlp(input_message):
-    
     client = Client("https://qwen-qwen1-5-72b-chat.hf.space/--replicas/3kh1x/")
     result = client.predict(
         input_message,
@@ -49,6 +46,5 @@ def query_predict_nlp(input_message):
         "None",
         api_name="/model_chat"
     )
-    
-    return result[1][1][1]
 
+    return result[1][1][1]
