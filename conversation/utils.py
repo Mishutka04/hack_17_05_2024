@@ -7,25 +7,26 @@ from config.settings import TOKEN_TRANSFORMRS_API
 headers = {"Authorization": f"Bearer {TOKEN_TRANSFORMRS_API}"}
 
 
-# def query_wisper(data):
-#     API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3" # noqa
-#     response = requests.post(
-#         API_URL,
-#         headers=headers,
-#         data=data
-#         )
-#     print(response.json())
-#     return response.json().get('text')
-
-
 def query_wisper(data):
-    whisper_model = stable_whisper.load_model(
-    'large-v3',
-    download_root="/media/robot/files/analyzer_offic_ negotiations/ml_models")  # noqa
-    result = whisper_model.transcribe(data)
-    # print(result.text)
-    # result.save_as_json("data.json")
-    return result.text
+    API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3" # noqa
+    response = requests.post(
+        API_URL,
+        headers=headers,
+        data=data
+        )
+    re = response.json().get('text')
+    print(re)
+    return re
+
+
+# def query_wisper(data):
+#     whisper_model = stable_whisper.load_model(
+#     'large-v3',
+#     download_root="/media/robot/files/analyzer_offic_ negotiations/ml_models")  # noqa
+#     result = whisper_model.transcribe(data)
+#     # print(result.text)
+#     # result.save_as_json("data.json")
+#     return result.text
 
 
 
