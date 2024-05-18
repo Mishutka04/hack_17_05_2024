@@ -5,28 +5,31 @@
                 <div class="category">
                     <div class="category_description">
                         <div>
-                            <div class="block_title">Категория</div>
+                            <div class="block_title">Линии</div>
                             <div class="line"></div>
                             <div v-for="(line, index) in lines" :key='index' v-if="lines">
                                 <div class="item" @click="Mark_get(line.id)">
                                     <div>{{ line.title }}</div>
+                                    <img src="../assets/home.png" alt="" width="27px" height="27px">
                                 </div>
                             </div>
                         </div>
-                        <div class="mark">
+                        
+                        <div class="mark_bottom">
+                            <div class="line"></div>
                             <div class="container">
                                 <div class="mark_content">
                                     <div class="mark_items">
                                         <div class="mark_item">
-                                            <div><img src="../assets/yes.png" alt="yes" width="30px" height="30px">
-                                            <div>Нарушений нет</div>
-                                            
-                                            </div>
+                                            <img src="../assets/yes.png" alt="yes" width="30px" height="30px">
+                                            <div><b>Нарушений нет</b></div>
+
+
                                         </div>
                                         <div class="mark_item">
-                                            <div><img src="../assets/no.png" alt="yes" width="30px" height="30px">
-                                            <div>Нарушения</div>
-                                            </div>
+                                            <img src="../assets/no.png" alt="yes" width="30px" height="30px">
+                                            <div><b>Нарушения</b></div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -38,19 +41,19 @@
             </div>
             <div class="col-sm-7 height">
                 <div class="graph">
-                    <div class="block_title">График</div>
+                    <div class="block_title">График нарушений</div>
                     <div class="line"></div>
                     <div class="grafic">
                         <canvas id="myChart" width="300" height="300"></canvas>
                     </div>
                 </div>
                 <div class="stat">
-                    <div class="block_title">Дополнительная информация</div>
+                    <div class="block_title">Детальная информация</div>
                     <div class="line"></div>
-                    <div class="stat_item">Качество переговоров - {{ this.sr_count }} %</div>
-                    <div class="stat_item">Качество нарушений - {{ this.count_not_accept }}</div>
-                    <div class="stat_item">Качество переговоров без нарушений - {{ this.count_accept }}</div>
-                    
+                    <div class="stat_item">Качество переговоров - <b>{{ this.sr_count }} %</b></div>
+                    <div class="stat_item">Качество нарушений - <b>{{ this.count_not_accept }}</b></div>
+                    <div class="stat_item">Качество переговоров без нарушений - <b>{{ this.count_accept }}</b></div>
+
                 </div>
             </div>
         </div>
@@ -63,7 +66,7 @@ import axios from 'axios';
 import Chart from 'chart.js/auto';
 export default {
     components: {
-        
+
     },
     data() {
         return {
@@ -106,7 +109,7 @@ export default {
                         labels: ["Нарушения", "Без нарушений"],
                         datasets: [{
                             label: "Единиц",
-                            backgroundColor: ["#FF0000", "#008000"],
+                            backgroundColor: ["#FF3300", "#66CC66"],
                             data: [this.count_accept, this.count_not_accept]
                         }]
                     },
